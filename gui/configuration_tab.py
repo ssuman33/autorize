@@ -15,6 +15,7 @@ from javax.swing import JCheckBox
 from javax.swing import JButton
 from javax.swing import JPanel
 from javax.swing import JLabel
+from crawler_tab import Crawler  
 
 from table import UpdateTableEDT
 
@@ -29,6 +30,12 @@ class ConfigurationTab():
         self._extender.startButton = JToggleButton("Autorize is off",
                                     actionPerformed=self.startOrStop)
         self._extender.startButton.setBounds(10, 20, 230, 30)
+
+        self._extender.startButtonCrawl = JToggleButton("Crawler is off",
+                                    actionPerformed=self.startOrStopCrawl)  
+
+        self._extender.startButtonCrawl.setBounds(10, 50, 230, 30)
+
 
         self._extender.clearButton = JButton("Clear List", actionPerformed=self.clearList)
         self._extender.clearButton.setBounds(10, 80, 100, 30)
@@ -93,6 +100,10 @@ class ConfigurationTab():
         self._extender.filtersTabs.addTab("Match/Replace", self._extender.MRPnl)
         self._extender.filtersTabs.addTab("Table Filter", self._extender.filterPnl)
         self._extender.filtersTabs.addTab("Save/Restore", self._extender.exportPnl)
+        crawler = Crawler(self._extender)  
+        crawler.draw()  
+        self._extender.filtersTabs.addTab("Crawler", crawler.get_crawler_panel())  
+
 
         self._extender.filtersTabs.setSelectedIndex(2)
         self._extender.filtersTabs.setBounds(0, 350, 2000, 700)
@@ -101,6 +112,8 @@ class ConfigurationTab():
         self.config_pnl.setBounds(0, 0, 1000, 1000)
         self.config_pnl.setLayout(None)
         self.config_pnl.add(self._extender.startButton)
+        self.config_pnl.add(self._extender.startButtonCrawl)
+
         self.config_pnl.add(self._extender.clearButton)
         self.config_pnl.add(scrollReplaceString)
         self.config_pnl.add(fromLastRequestLabel)
@@ -130,6 +143,16 @@ class ConfigurationTab():
         else:
             self._extender.startButton.setText("Autorize is off")
             self._extender.startButton.setSelected(False)
+            self._extender.intercept = 0
+
+    def startOrStopCrawl(self, event):
+        if self._extender.startButtonCrawl.getText() == "Crawler is off":
+            self._extender.startButtonCrawl.setText("Crawler is on")
+            self._extender.startButtonCrawl.setSelected(True)
+            self._extender.intercept = 1
+        else:
+            self._extender.startButtonCrawl.setText("Crawler is off")
+            self._extender.startButtonCrawl.setSelected(False)
             self._extender.intercept = 0
     
     def clearList(self, event):

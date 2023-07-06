@@ -96,6 +96,7 @@ class EnforcementDetectors():
         self._extender.EDPnl.add(scrollEDList)
 
 
+
     def draw_unauthenticated(self):
         """ init enforcement detector tab
         """

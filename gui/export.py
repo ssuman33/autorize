@@ -101,6 +101,7 @@ class Export():
             exportPnl.add(self.restoreStateButton)
             exportPnl.add(self.removeDuplicates)
 
+
     def export(self, event):
             if self.exportType.getSelectedItem() == "HTML":
                 self.exportToHTML()

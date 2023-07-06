@@ -7,6 +7,8 @@ from helpers.initiator import Initiator
 from helpers.filters import handle_proxy_message
 
 class BurpExtender(IBurpExtender, IHttpListener, IProxyListener):
+    def __init__(self):  
+        self.CPnl = None 
 
     def registerExtenderCallbacks(self, callbacks):
         self._callbacks = callbacks
@@ -39,4 +41,3 @@ class BurpExtender(IBurpExtender, IHttpListener, IProxyListener):
     #
     def processProxyMessage(self, messageIsRequest, message):
         handle_proxy_message(self,message)
-        

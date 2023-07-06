@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
-
+from gui.crawler_tab import Crawler
 from gui.enforcement_detector import EnforcementDetectors
 from gui.interception_filters import InterceptionFilters
 from gui.configuration_tab import ConfigurationTab
@@ -53,6 +53,9 @@ class Initiator():
 
         cfg_tab = ConfigurationTab(self._extender)
         cfg_tab.draw()
+
+        crawlert = Crawler(self._extender)
+        crawlert.draw()
 
         tabs = Tabs(self._extender)
         tabs.draw()
